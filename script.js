@@ -26,6 +26,7 @@ num_people.addEventListener("input", () => {
     console.log(num_people.value)
 })
 
+const start_time = document.getElementById('start-time');
 
 
 closeBtn.addEventListener("click", () => {
