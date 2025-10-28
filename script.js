@@ -1,10 +1,19 @@
-const day20 = document.getElementById('wrap-days');
-const children = day20.querySelectorAll('*');
+const overlay = document.getElementById('overlay');
 
-children.forEach(element => {
-    element.addEventListener('click', pop);
+const days = document.getElementById('wrap-days');
+const day_children = days.querySelectorAll('*');
+
+const closeBtn = document.getElementById('closeBtn');
+const dialog = document.getElementById('dialog');
+
+
+day_children.forEach(element => {
+    element.addEventListener('click', () => {
+        overlay.classList.remove("hidden");
+        dialog.focus();
+    });
 });
-function pop(e){
-    e.preventDefault();
-    alert('work :)')
-}
+
+closeBtn.addEventListener("click", () => {
+    overlay.classList.add("hidden");
+});

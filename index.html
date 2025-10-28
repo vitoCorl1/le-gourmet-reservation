@@ -374,6 +374,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- Overlay -->
+        <div id="overlay" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+            <!-- Dialog -->
+            <div id="dialog"
+                class="bg-white w-full max-w-lg rounded-lg shadow-xl p-6
+                        focus:outline-none"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="dialogTitle">
+                
+                <form>
+                    <label for=""></label>
+                </form>
+
+                <button id="closeBtn"
+                        class="mt-2 inline-flex justify-center rounded-md
+                                bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700
+                                focus-visible:ring-2 focus-visible:ring-offset-2
+                                focus-visible:ring-indigo-500">
+                    Close
+                </button>
+            </div>
+        </div>
     </section>
     <script src="./script.js"></script>
 </body>
