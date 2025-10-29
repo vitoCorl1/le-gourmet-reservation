@@ -375,7 +375,7 @@
         </div>
 
         <!-- Overlay -->
-        <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
             <!-- Dialog -->
             <div id="dialog" class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
 
@@ -479,6 +479,7 @@
                             </button>
                             <button 
                                 type="submit"
+                                id="ConfirmBtn"
                                 class="flex-1 px-4 py-2.5 bg-gray-900 from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all font-medium shadow-lg shadow-indigo-500/30"
                             >
                                 Confirm Reservation
