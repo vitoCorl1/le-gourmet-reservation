@@ -3,10 +3,13 @@ const days = document.getElementById('wrap-days');
 const day_children = days.querySelectorAll('div');
 const closeBtn = document.getElementById('closeBtn');
 const dialog = document.getElementById('dialog');
+const dayElements = document.querySelectorAll('#wrap-days > div');
 
 const allData = {};
 
 let selectedDay = null;
+
+
 day_children.forEach(element => {
     element.addEventListener('click', () => {
         const dayNumber = element.querySelector('span')?.textContent.trim();
@@ -62,7 +65,7 @@ ConfirmBtn.addEventListener('click', (e) => {
         return;
     }else{
         ConfirmPoeple.classList.add('hidden');
-        ConfirmPoeple.style.border = "1px solid green";
+        num_people.style.border = "1px solid green";
     }
 
     //time comfirmation
@@ -70,13 +73,19 @@ ConfirmBtn.addEventListener('click', (e) => {
         start_time.style.border = "1px solid red"; 
         end_time.style.border = "1px solid red"; 
         return;
+    }else{
+        start_time.style.border = "1px solid green"; 
+        end_time.style.border = "1px solid green"; 
     }
 
     if(!(reservation_type.value)) {
         reservation_type.style.border = "1px solid red"; 
         return;
+    }else{
+        reservation_type.style.border = "1px solid green"; 
     }
 
+    //add reservation data to the object 
     if (!allData[selectedDay]) allData[selectedDay] = [];
     allData[selectedDay].push({
         name: res_title.value,
@@ -84,6 +93,41 @@ ConfirmBtn.addEventListener('click', (e) => {
         start: start_time.value,
         end: end_time.value
     })
+
+    // find the clicked day
+    const targetDayElement = [...day_children].find(el => {
+        const span = el.querySelector('span');
+        return span && span.textContent.trim() === selectedDay;
+    });
+
+    // inject visual mark
+    if (targetDayElement) {
+        const reservationMark = document.createElement('div');
+        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 rounded';
+        reservationMark.title = `${allData.name} (${allData.start}–${allData.end})`;
+        targetDayElement.appendChild(reservationMark);
+
+        const index = allData[selectedDay].length - 1;
+        reservationMark.dataset.day = selectedDay;
+        reservationMark.dataset.index = index;
+
+        reservationMark.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const day = e.target.dataset.day;
+        const idx = e.target.dataset.index;
+        const data = allData[day][idx];
+
+        const Display = document.getElementById('display');
+        Display.classList.remove('hidden');
+        res_title.value = data.name;
+        num_people.value = data.people;
+        start_time.value = data.start;
+        end_time.value = data.end;
+        reservation_type.value = data.type;
+        });
+        closeBtn.addEventListener('click', () => closeBtn.classList.add('hidden'));
+    }
+
     console.log(allData);
     overlay.classList.add('hidden')
 })
