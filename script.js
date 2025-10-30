@@ -103,13 +103,45 @@ ConfirmBtn.addEventListener('click', (e) => {
     // inject visual mark
     if (targetDayElement) {
         const reservationMark = document.createElement('div');
-        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 rounded';
-        reservationMark.title = `${allData.name} (${allData.start}–${allData.end})`;
+        const deleteReservation = document.createElement('button');
+        const editReservation = document.createElement('button');
+        
+        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 flex rounded';
+        deleteReservation.className = 'w-2 h-2 rounded bg-red-500';
+        editReservation.className = 'w-2 h-2 rounded bg-blue-500';
+        
+        reservationMark.title = `${allData.name} (${allData.start}-${allData.end})`;
+        deleteReservation.title = '*';
+        editReservation.title = '-';
+
         targetDayElement.appendChild(reservationMark);
+        reservationMark.appendChild(deleteReservation);
+        reservationMark.appendChild(editReservation);
 
         const index = allData[selectedDay].length - 1;
         reservationMark.dataset.day = selectedDay;
         reservationMark.dataset.index = index;
+
+
+        reservationMark.addEventListener('mouseenter', (e) => {
+            const day = e.target.dataset.day;
+            const idx = e.target.dataset.index;
+            const data = allData[day][idx];
+            
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.id = 'hover-tooltip';
+            tooltip.className = 'absolute bg-gray-800 text-white text-xs rounded px-2 py-1 z-50 shadow-lg';
+            tooltip.textContent = `${data.name} (${data.start} to ${data.end})`;
+            tooltip.style.left = e.pageX + 'px';
+            tooltip.style.top = (e.pageY - 40) + 'px';
+            document.body.appendChild(tooltip);
+        });
+
+        reservationMark.addEventListener('mouseleave', () => {
+            const tooltip = document.getElementById('hover-tooltip');
+            if (tooltip) tooltip.remove();
+        });
 
         reservationMark.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -118,14 +150,20 @@ ConfirmBtn.addEventListener('click', (e) => {
         const data = allData[day][idx];
 
         const Display = document.getElementById('display');
+        
         Display.classList.remove('hidden');
         res_title.value = data.name;
         num_people.value = data.people;
         start_time.value = data.start;
         end_time.value = data.end;
         reservation_type.value = data.type;
+        
+        const rRBtn = document.getElementById('r-R-Btn');
+        
+        // deleteReservation.addEventListener("click" ())
+
+        rRBtn.addEventListener("click", () => Display.classList.add("hidden"));
         });
-        closeBtn.addEventListener('click', () => closeBtn.classList.add('hidden'));
     }
 
     console.log(allData);
