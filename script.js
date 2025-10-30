@@ -160,7 +160,7 @@ ConfirmBtn.addEventListener('click', (e) => {
         
         const rRBtn = document.getElementById('r-R-Btn');
         
-        // deleteReservation.addEventListener("click" ())
+        deleteReservation.addEventListener("click" ())
 
         rRBtn.addEventListener("click", () => Display.classList.add("hidden"));
         });
