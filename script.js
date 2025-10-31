@@ -84,6 +84,7 @@ ConfirmBtn.addEventListener('click', (e) => {
     }else{
         reservation_type.style.border = "1px solid green"; 
     }
+    // console.log(`${reservation_type.value} haaaaaaaaaaa`);
 
     //add reservation data to the object 
     if (!allData[selectedDay]) allData[selectedDay] = [];
@@ -91,7 +92,8 @@ ConfirmBtn.addEventListener('click', (e) => {
         name: res_title.value,
         people: num_people.value,
         start: start_time.value,
-        end: end_time.value
+        end: end_time.value,
+        type: reservation_type.value
     })
 
     // find the clicked day
@@ -102,12 +104,26 @@ ConfirmBtn.addEventListener('click', (e) => {
 
     // inject visual mark
     if (targetDayElement) {
+        const index = allData[selectedDay].length - 1;
+        const rev = allData[selectedDay][allData[selectedDay].length - 1];
+
         const reservationMark = document.createElement('div');
-        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 rounded';
+        reservationMark.className = 'mt-1 h-2 w-full rounded';
+        
+        // Add type-based color tags (VIP, Standard, Group, etc.).
+        const colorMap = {
+            anniversaire: 'bg-green-600',
+            'in-place': 'bg-blue-600',
+            vip: 'bg-orange-600',
+        };
+
+        // Option 1: use reservation type color
+        const typeColor = colorMap[rev.type] || 'bg-gray-400';
+        reservationMark.classList.add(typeColor);
+
         reservationMark.title = `${allData.name} (${allData.start}–${allData.end})`;
         targetDayElement.appendChild(reservationMark);
 
-        const index = allData[selectedDay].length - 1;
         reservationMark.dataset.day = selectedDay;
         reservationMark.dataset.index = index;
 
@@ -140,7 +156,6 @@ ConfirmBtn.addEventListener('click', (e) => {
 
         const Display = document.getElementById('display');
         const NameChild = document.getElementById('name-reservationMark');
-        console.log(NameChild);
         const peoplechild = document.getElementById('people-reservationMark');
         const startchild = document.getElementById('start-reservationMark');
         const endchild = document.getElementById('end-reservationMark');
@@ -164,8 +179,16 @@ ConfirmBtn.addEventListener('click', (e) => {
 
         // reservation mark edit button
         const editReservation = document.getElementById('edit-reservationMark');
-        deletReservationMark.addEventListener("click", () => {
-            
+        editReservation.addEventListener("click", () => {
+            Display.classList.add('hidden');
+            overlay.classList.remove("hidden");
+            allData[selectedDay].splice(index, 1);
+            reservationMark.remove(e);
+
+            const remainingMarks = document.querySelectorAll(`[data-day="${selectedDay}"]`);
+            remainingMarks.forEach((mark, i) => {
+                mark.dataset.index = i;
+            });
         }) 
     });
     
