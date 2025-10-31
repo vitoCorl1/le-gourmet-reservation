@@ -103,20 +103,9 @@ ConfirmBtn.addEventListener('click', (e) => {
     // inject visual mark
     if (targetDayElement) {
         const reservationMark = document.createElement('div');
-        const deleteReservation = document.createElement('button');
-        const editReservation = document.createElement('button');
-        
-        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 flex rounded';
-        deleteReservation.className = 'w-2 h-2 rounded bg-red-500';
-        editReservation.className = 'w-2 h-2 rounded bg-blue-500';
-        
-        reservationMark.title = `${allData.name} (${allData.start}-${allData.end})`;
-        deleteReservation.title = '*';
-        editReservation.title = '-';
-
+        reservationMark.className = 'mt-1 h-2 w-full bg-gray-700 rounded';
+        reservationMark.title = `${allData.name} (${allData.start}–${allData.end})`;
         targetDayElement.appendChild(reservationMark);
-        reservationMark.appendChild(deleteReservation);
-        reservationMark.appendChild(editReservation);
 
         const index = allData[selectedDay].length - 1;
         reservationMark.dataset.day = selectedDay;
@@ -150,20 +139,30 @@ ConfirmBtn.addEventListener('click', (e) => {
         const data = allData[day][idx];
 
         const Display = document.getElementById('display');
-        
-        Display.classList.remove('hidden');
-        res_title.value = data.name;
-        num_people.value = data.people;
-        start_time.value = data.start;
-        end_time.value = data.end;
-        reservation_type.value = data.type;
-        
-        const rRBtn = document.getElementById('r-R-Btn');
-        
-        deleteReservation.addEventListener("click" ())
+        const NameChild = document.getElementById('name-reservationMark');
+        console.log(NameChild);
+        const peoplechild = document.getElementById('people-reservationMark');
+        const startchild = document.getElementById('start-reservationMark');
+        const endchild = document.getElementById('end-reservationMark');
 
-        rRBtn.addEventListener("click", () => Display.classList.add("hidden"));
-        });
+        Display.classList.remove('hidden');
+        NameChild.textContent = data.name;
+        peoplechild.textContent = data.people;
+        startchild.textContent = data.start;
+        endchild.textContent = data.end;
+
+        const cancelReservationMark = document.getElementById('cancel-reservationMark');
+        cancelReservationMark.addEventListener("click", () => Display.classList.add('hidden'));
+
+        const deletReservationMark = document.getElementById('delete-reservationMark');
+        deletReservationMark.addEventListener("click", () => {
+            Display.classList.add('hidden');
+            delete allData[selectedDay];
+            console.log(allData)
+            reservationMark.remove();
+        })
+    });
+    
     }
 
     console.log(allData);

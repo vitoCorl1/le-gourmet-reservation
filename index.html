@@ -500,30 +500,45 @@
         <div id="display" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
            <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
                 <div class="px-6 py-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
-                    <h1 class="text-2xl font-bold text-gray-800 mb-2">dnfjdf</h1>
-                    <p class="text-sm text-gray-500 mb-4">23</p>
+                    <h1 id="name-reservationMark" class="text-2xl font-bold text-gray-800 mb-2">  </h1>
+                    <p id="people-reservationMark" class="text-1xl text-gray-500 mb-4">  </p>
                     <div class="flex items-center justify-center gap-4 mb-4 text-sm text-gray-600">
-                        <p class="flex items-center gap-1">
+                        <p id="start-reservationMark"  class="flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            00:23
+
                         </p>
-                        <p class="flex items-center gap-1">
+                        <p id="end-reservationMark" class="flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            23:44
+                            
                         </p>
                     </div>
-                    <p class="text-gray-700 leading-relaxed">fdjfdjfdfn</p>
+                    <p class="text-gray-700 leading-relaxed"></p>
                     <button 
                         type="button"
-                        id="r-R-Btn"
+                        id="cancel-reservationMark"
                         class="flex-1 px-4 py-2.5 border bg-grey-400 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-500 transition-colors font-medium"
                     >
                         Cancel
-                    </button>
+                    </button> 
+                    <button 
+                        type="button"
+                        id="delete-reservationMark"
+                        class="flex-1 px-4 py-2.5 border bg-red-400 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-500 transition-colors font-medium"
+                    >
+                        Delete
+                    </button> 
+                    <button 
+                        type="button"
+                        id="edit-reservationMark"
+                        class="flex-1 px-4 py-2.5 border bg-blue-400 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-500 transition-colors font-medium"
+                    >
+                        Edit
+                    </button> 
+                    
                 </div>
             </div>
         </div>
