@@ -69,14 +69,14 @@ ConfirmBtn.addEventListener('click', (e) => {
     }
 
     //time comfirmation
-    if(start_time.value > end_time.value){
-        start_time.style.border = "1px solid red"; 
-        end_time.style.border = "1px solid red"; 
-        return;
-    }else{
-        start_time.style.border = "1px solid green"; 
-        end_time.style.border = "1px solid green"; 
-    }
+    // if(start_time.value > end_time.value){
+    //     start_time.style.border = "1px solid red"; 
+    //     end_time.style.border = "1px solid red"; 
+    //     return;
+    // }else{
+    //     start_time.style.border = "1px solid green"; 
+    //     end_time.style.border = "1px solid green"; 
+    // }
 
     if(!(reservation_type.value)) {
         reservation_type.style.border = "1px solid red"; 
@@ -154,17 +154,25 @@ ConfirmBtn.addEventListener('click', (e) => {
         const cancelReservationMark = document.getElementById('cancel-reservationMark');
         cancelReservationMark.addEventListener("click", () => Display.classList.add('hidden'));
 
+        // reservation mark delete button
         const deletReservationMark = document.getElementById('delete-reservationMark');
-        deletReservationMark.addEventListener("click", () => {
+        deletReservationMark.addEventListener("click", (e) => {
             Display.classList.add('hidden');
             delete allData[selectedDay];
-            console.log(allData)
-            reservationMark.remove();
+            reservationMark.remove(e);
         })
+
+        // reservation mark edit button
+        const editReservation = document.getElementById('edit-reservationMark');
+        deletReservationMark.addEventListener("click", () => {
+            
+        }) 
     });
     
     }
 
     console.log(allData);
+    const inputForm = document.getElementById('input-form');
+    inputForm.reset();
     overlay.classList.add('hidden')
 })
